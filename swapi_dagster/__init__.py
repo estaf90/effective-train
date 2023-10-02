@@ -2,6 +2,7 @@ from dagster import (
     AssetSelection,
     Definitions,
     ScheduleDefinition,
+    DefaultScheduleStatus,
     define_asset_job,
     load_assets_from_modules,
 )
@@ -14,7 +15,8 @@ all_assets_job = define_asset_job("all_assets_job", selection=AssetSelection.all
 
 all_assets_schedule = ScheduleDefinition(
     job=all_assets_job,
-    cron_schedule="0 0 * * *",  # Run job 00:00 every day.
+    cron_schedule="@daily",
+    default_status=DefaultScheduleStatus.RUNNING,
 )
 
 defs = Definitions(
