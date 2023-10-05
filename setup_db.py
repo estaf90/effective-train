@@ -1,4 +1,4 @@
-from sqlalchemy_utils import database_exists, create_database
+from sqlalchemy_utils import create_database, database_exists
 
 import swapi_dagster.db_models as db_models
 from swapi_dagster.db import engine_factory

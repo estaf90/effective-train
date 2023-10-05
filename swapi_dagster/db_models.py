@@ -1,19 +1,8 @@
-from typing import (
-    List,
-)
-from sqlalchemy import (
-    String,
-    Integer,
-    BigInteger,
-    Float,
-    DateTime,
-    Column,
-)
+from typing import List
+
+from sqlalchemy import BigInteger, Column, DateTime, Float, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import (
-    Mapped,
-    mapped_column,
-)
+from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.types import JSON
 
 Base = declarative_base()
@@ -85,6 +74,7 @@ class Vehicle(Base):
     edited = Column(DateTime)
     dagster_run_id = Column(String)
 
+
 class Starship(Base):
     __tablename__ = "starships"
 
@@ -154,18 +144,17 @@ class Planet(Base):
 
 
 def get_model(kind: str):
-    match kind:
-        case "films":
-            return Film
-        case "people":
-            return People
-        case "vehicles":
-            return Vehicle
-        case "starships":
-            return Starship
-        case "species":
-            return Species
-        case "planets":
-            return Planet
-        case _:
-            raise NotImplementedError(f"No model found for {kind}!")
+
+    if kind == "films":
+        return Film
+    if kind == "people":
+        return People
+    if kind == "vehicles":
+        return Vehicle
+    if kind == "starships":
+        return Starship
+    if kind == "species":
+        return Species
+    if kind == "planets":
+        return Planet
+    raise NotImplementedError(f"No model found for {kind}!")

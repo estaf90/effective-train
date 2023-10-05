@@ -1,5 +1,7 @@
-from pydantic import BaseModel, validator, HttpUrl
-from typing import List, Optional
+from typing import List
+
+from pydantic import BaseModel, HttpUrl
+
 
 class SwapiBaseModel(BaseModel):
     url: HttpUrl                    # string -- the hypermedia URL of this resource.
@@ -19,7 +21,7 @@ class Film(SwapiBaseModel):
     vehicles: List[HttpUrl]         # array -- An array of vehicle resource URLs that are in this film.
     characters: List[HttpUrl]       # array -- An array of people resource URLs that are in this film.
     planets: List[HttpUrl]          # array -- An array of planet resource URLs that are in this film.
-    
+
 
 class People(SwapiBaseModel):
     name: str                       # string -- The name of this person.
@@ -52,6 +54,7 @@ class Vehicle(SwapiBaseModel):
     films: List[HttpUrl]            # array -- An array of Film URL Resources that this vehicle has appeared in.
     pilots: List[HttpUrl]           # array -- An array of People URL Resources that this vehicle has been piloted by.
 
+
 class Starship(SwapiBaseModel):
     name: str                       # string -- The name of this starship. The common name, such as "Death Star".
     model: str                      # string -- The model or official name of this starship. Such as "T-65 X-wing" or "DS-1 Orbital Battle Station".
@@ -69,6 +72,7 @@ class Starship(SwapiBaseModel):
     films: List[HttpUrl]            # array -- An array of Film URL Resources that this starship has appeared in.
     pilots: List[HttpUrl]           # array -- An array of People URL Resources that this starship has been piloted by.
 
+
 class Species(SwapiBaseModel):
     name: str                       # string -- The name of this species.
     classification: str             # string -- The classification of this species, such as "mammal" or "reptile".
@@ -83,6 +87,7 @@ class Species(SwapiBaseModel):
     people: List[HttpUrl]           # array -- An array of People URL Resources that are a part of this species.
     films: List[HttpUrl]            # array -- An array of Film URL Resources that this species has appeared in.
 
+
 class Planet(SwapiBaseModel):
     name: str                       # string -- The name of this planet.
     diameter: int                   # string -- The diameter of this planet in kilometers.
@@ -96,19 +101,19 @@ class Planet(SwapiBaseModel):
     residents: List[HttpUrl]        # array -- An array of People URL Resources that live on this planet.
     films: List[HttpUrl]            # array -- An array of Film URL Resources that this planet has appeared in.
 
+
 def get_model(kind: str):
-    match kind:
-        case "films":
-            return Film
-        case "people":
-            return People
-        case "vehicles":
-            return Vehicle
-        case "starships":
-            return Starship
-        case "species":
-            return Species
-        case "planets":
-            return Planet
-        case _:
-            raise NotImplementedError(f"No model found for {kind}!")
+
+    if kind == "films":
+        return Film
+    if kind == "people":
+        return People
+    if kind == "vehicles":
+        return Vehicle
+    if kind == "starships":
+        return Starship
+    if kind == "species":
+        return Species
+    if kind == "planets":
+        return Planet
+    raise NotImplementedError(f"No model found for {kind}!")

@@ -1,11 +1,6 @@
-from dagster import (
-    AssetSelection,
-    Definitions,
-    ScheduleDefinition,
-    DefaultScheduleStatus,
-    define_asset_job,
-    load_assets_from_modules,
-)
+from dagster import (AssetSelection, DefaultScheduleStatus, Definitions,
+                     ScheduleDefinition, define_asset_job,
+                     load_assets_from_modules)
 
 from . import assets
 
