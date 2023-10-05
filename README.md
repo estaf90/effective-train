@@ -2,7 +2,7 @@
 
 Repository containing my proposed stack for the code test given by Knowit.
 
-
+A customer wants to analyze data from swapi.dev on a daily basis, make a rudimentary stack for downloading data from swapi.dev and making it available for analysis.
 
 ## Solution
 
