@@ -29,9 +29,9 @@ def get_data(kind: str, context: AssetExecutionContext) -> None:
     r = requests.get(f"{base_url}{kind}").json()
     data.extend(r["results"])
 
-    # while r["next"] is not None:
-    #     r = requests.get(r["next"]).json()
-    #     data.extend(r["results"])
+    while r["next"] is not None:
+        r = requests.get(r["next"]).json()
+        data.extend(r["results"])
 
     data_path.mkdir(exist_ok=True)
     with open(str(data_path.joinpath(f"raw_{kind}.json")), "w") as fo:
@@ -130,9 +130,9 @@ def insert_table(kind: str, context: AssetExecutionContext):
 
     engine = db.engine_factory()
     
-    run_id = context.run_id
+    run_id = context.run_id[:8]  # Short run id
     for item in data:  # Add run id to all items
-        item.update(dagster_run_id=run_id[:8])  # Short run id
+        item.update(dagster_run_id=run_id)
 
     db_model = db_models.get_model(kind)
 
