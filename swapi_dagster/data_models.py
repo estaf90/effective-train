@@ -37,7 +37,7 @@ class People(SwapiBaseModel):
     vehicles: List[HttpUrl]         # array -- An array of vehicle resource URLs that this person has piloted.
 
 
-class Vehicles(SwapiBaseModel):
+class Vehicle(SwapiBaseModel):
     name: str                       # string -- The name of this vehicle. The common name, such as "Sand Crawler" or "Speeder bike".
     model: str                      # string -- The model or official name of this vehicle. Such as "All-Terrain Attack Transport".
     vehicle_class: str              # string -- The class of this vehicle, such as "Wheeled" or "Repulsorcraft".
@@ -52,7 +52,7 @@ class Vehicles(SwapiBaseModel):
     films: List[HttpUrl]            # array -- An array of Film URL Resources that this vehicle has appeared in.
     pilots: List[HttpUrl]           # array -- An array of People URL Resources that this vehicle has been piloted by.
 
-class Starships(SwapiBaseModel):
+class Starship(SwapiBaseModel):
     name: str                       # string -- The name of this starship. The common name, such as "Death Star".
     model: str                      # string -- The model or official name of this starship. Such as "T-65 X-wing" or "DS-1 Orbital Battle Station".
     starship_class: str             # string -- The class of this starship, such as "Starfighter" or "Deep Space Mobile Battlestation"
@@ -83,7 +83,7 @@ class Species(SwapiBaseModel):
     people: List[HttpUrl]           # array -- An array of People URL Resources that are a part of this species.
     films: List[HttpUrl]            # array -- An array of Film URL Resources that this species has appeared in.
 
-class Planets(SwapiBaseModel):
+class Planet(SwapiBaseModel):
     name: str                       # string -- The name of this planet.
     diameter: int                   # string -- The diameter of this planet in kilometers.
     rotation_period: int            # string -- The number of standard hours it takes for this planet to complete a single rotation on its axis.
@@ -103,12 +103,12 @@ def get_model(kind: str):
         case "people":
             return People
         case "vehicles":
-            return Vehicles
+            return Vehicle
         case "starships":
-            return Starships
+            return Starship
         case "species":
             return Species
         case "planets":
-            return Planets
+            return Planet
         case _:
             raise NotImplementedError(f"No model found for {kind}!")

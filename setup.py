@@ -7,5 +7,5 @@ setup(
         "dagster",
         "dagster-cloud"
     ],
-    extras_require={"dev": ["dagster-webserver", "pytest", "pandas"]},
+    extras_require={"dev": ["dagster-webserver", "pytest", "pandas", "psycopg2-binary", "sqlalchemy-utils"]},
 )
