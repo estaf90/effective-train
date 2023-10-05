@@ -148,14 +148,13 @@ def insert_table(kind: str, context: AssetExecutionContext):
         session.add_all(db_items)
         session.commit()
 
-
     query_str = f"SELECT * FROM {kind} WHERE dagster_run_id = '{run_id}'"
     logger.info(f"Query: {query_str}")
     df = pd.read_sql_query(
         query_str,
-        con = engine
+        con=engine
     )
-    
+
     context.add_output_metadata(
         metadata={
             "shape": str(df.shape),
@@ -163,25 +162,31 @@ def insert_table(kind: str, context: AssetExecutionContext):
         }
     )
 
+
 @asset(deps=[validate_films])
 def insert_films_table(context: AssetExecutionContext):
     insert_table("films", context)
+
 
 @asset(deps=[validate_people])
 def insert_people_table(context: AssetExecutionContext):
     insert_table("people", context)
 
+
 @asset(deps=[validate_vehicles])
 def insert_vehicles_table(context: AssetExecutionContext):
     insert_table("vehicles", context)
+
 
 @asset(deps=[validate_starships])
 def insert_starships_table(context: AssetExecutionContext):
     insert_table("starships", context)
 
+
 @asset(deps=[validate_species])
 def insert_species_table(context: AssetExecutionContext):
     insert_table("species", context)
+
 
 @asset(deps=[validate_planets])
 def insert_planets_table(context: AssetExecutionContext):
