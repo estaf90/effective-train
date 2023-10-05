@@ -132,7 +132,7 @@ def insert_table(kind: str, context: AssetExecutionContext):
     
     run_id = context.run_id
     for item in data:  # Add run id to all items
-        item.update(dagster_run_id=run_id)
+        item.update(dagster_run_id=run_id[:8])  # Short run id
 
     db_model = db_models.get_model(kind)
 

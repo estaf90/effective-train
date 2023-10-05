@@ -1,5 +1,3 @@
-import pandas as pd
-import sqlalchemy as sa
 from sqlalchemy_utils import database_exists, create_database
 
 import swapi_dagster.db_models as db_models
